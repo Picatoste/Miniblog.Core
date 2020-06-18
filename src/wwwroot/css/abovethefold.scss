@@ -7,6 +7,18 @@
     box-sizing: border-box;
 }
 
+
+ul.categories {
+    a {
+        color: #fff;
+    }
+    
+    a:link {
+        color: #fff;
+        text-decoration: none
+    }
+}
+
 html {
     min-height: 100%;
     position: relative;

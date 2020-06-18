@@ -1,7 +1,7 @@
 {
-  "name": "Miniblog.Core",
-  "short_name": "Miniblog.Core",
-  "description": "A short description of the blog.",
+  "name": "AnaMFerrer Blog",
+  "short_name": "AnaMFerrer",
+  "description": "Blog personal de Ana María Ferrer López.",
   "icons": [
     {
       "src": "/img/icon192x192.png",

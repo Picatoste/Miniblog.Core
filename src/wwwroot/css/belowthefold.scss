@@ -59,7 +59,7 @@ noscript p {
         display: inline-block;
 
         &:not(:first-child):not(:last-child):after {
-            content: ", ";
+            content: "";
         }
     }
 }

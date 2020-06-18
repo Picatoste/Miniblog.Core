@@ -1,4 +1,4 @@
-﻿@model Post
+@model Post
 @{
     var isNew = string.IsNullOrEmpty(Model.Title);
     ViewData[Constants.Title] = "Edit " + (Model.Title ?? "new post");
@@ -14,20 +14,20 @@
         <div asp-validation-summary="All"></div>
         <input type="hidden" asp-for="@Model.ID" />
 
-        <label asp-for="@Model.Title" class="label">Title</label>
+        <label asp-for="@Model.Title" class="label">Título</label>
         <input asp-for="@Model.Title" required placeholder="Title of blog post" aria-describedby="desc_title" />
-        <span class="desc" id="desc_title">The title as it appears on the website</span>
+		<span class="desc" id="desc_title">El título tal como aparece en el sitio web</span>
         <br />
 
         <label asp-for="@Model.Slug" class="label">Slug</label>
         <input asp-for="@Model.Slug" placeholder="The URL name" aria-describedby="desc_slug" />
-        <span class="desc" id="desc_slug">The part of the URL that identifies this blog post</span>
+		<span class="desc" id="desc_slug">La parte de la URL que identifica esta publicación de blog</span>
         <br />
 
-        <label for="categories" class="label">Tags</label>
+        <label for="categories" class="label">Etiquetas</label>
         <input type="text" name="selecttag" id="selecttag" aria-describedby="desc_categories" list="taglist" placeholder="@string.Join(", ", Model.Categories)"  />
         <input type="text" name="categories" id="categories" value="@string.Join(", ", Model.Categories)" hidden />
-        <span class="desc" id="desc_categories">Select, or build a comma separated list of keywords - to remove double the keyword</span>
+		<span class="desc" id="desc_categories">Seleccione, o cree una lista de palabras clave separadas por comas - para eliminar haga doble click en una palabra clave</span>
         <datalist id="taglist">
             @foreach (var cat in allCats)
             {
@@ -36,22 +36,22 @@
             </datalist>
         <br />
 
-        <label asp-for="@Model.Excerpt" class="label">Excerpt</label>
+        <label asp-for="@Model.Excerpt" class="label">Extracto</label>
         <textarea asp-for="@Model.Excerpt" rows="3" placeholder="Short description of blog post" aria-describedby="desc_excerpt">@Model.Excerpt</textarea>
-        <span class="desc" id="desc_excerpt">A brief description of the content of the post</span>
+		<span class="desc" id="desc_excerpt">Una breve descripción del contenido de la publicación</span>
         <br />
 
         <textarea asp-for="@Model.Content" rows="20" aria-label="Content">@Model.Content</textarea>
         <br />
 
-        <input type="submit" value="Save" title="Save the post" />
+        <input type="submit" value="Guardar" class="w3-button w3-green w3-round w3-padding-small w3-small" title="Guarda la publicación" />
 
         <input asp-for="@Model.IsPublished" />
-        <label asp-for="@Model.IsPublished">Is published</label>
+		<label asp-for="@Model.IsPublished">Es publicado</label>
 
         @if (!isNew)
         {
-            <input type="submit" value="Delete..." class="delete" title="Delete the post..." asp-action="DeletePost" asp-route-id="@Model.ID" />
+            <input type="submit" value="Borrar..." class="delete w3-button w3-red w3-round w3-small w3-padding-small" title="Borrar la publicación..." asp-action="DeletePost" asp-route-id="@Model.ID" />
         }
     </form>
 

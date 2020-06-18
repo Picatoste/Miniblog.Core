@@ -1,8 +1,12 @@
 @inject IOptionsSnapshot<BlogSettings> settings
+@inject Miniblog.Core.Services.IBlogService blogService
 @inject WebManifest manifest
 @{
 	var host = $"{Context.Request.Scheme}://{Context.Request.Host}";
+
+	var categories = await blogService.GetCategories().ToListAsync();
 }
+
 <!DOCTYPE html>
 <html lang="en">
 <head prefix="og:http://ogp.me/ns#">
@@ -27,10 +31,10 @@
 	<meta property="og:image:width" content="512" />
 	<meta property="og:image:height" content="512" />
 
-	<meta name="msapplication-square150x150logo" content="~/img/icon180x180.png" />
+	<meta name="msapplication-square150x150logo" content="~/img/icon128x128.png" />
 
 	<link rel="icon" type="image/png" sizes="16x16" href="~/img/icon16x16.png" />
-	<link rel="apple-touch-icon" href="~/img/icon180x180.png" />
+	<link rel="apple-touch-icon" href="~/img/icon128x128.png" />
 	<link rel="shortcut icon" href="~/img/icon16x16.png" />
 
 	<link rel="edituri" type="application/rsd+xml" title="RSD" href="~/rsd.xml" />
@@ -49,6 +53,14 @@
 				<img src="~/img/header.png" itemprop="url">
 			</p>
 			@*By <span itemprop="author">@settings.Value.Owner</span>*@
+			<div itemprop="categories" style="text-align: center;" itemscope itemtype="http://schema.org/Categories">
+				<ul class="categories">
+					@foreach (string cat in categories)
+				{
+					<li class="w3-tag w3-round w3-black w3-medium" style="transform:rotate(-3deg)" itemprop="articleSection"><a asp-controller="Blog" asp-action="Category" asp-route-category="@cat.ToLowerInvariant()" asp-route-page="">@cat</a></li>
+				}
+				</ul>
+			</div>
 		</div>
 	</header>
 
@@ -68,12 +80,12 @@
 
 						if (User.Identity.IsAuthenticated)
 						{
-							<li><a asp-controller="Blog" asp-action="Edit" asp-route-id="">@Miniblog.Core.Properties.Resources.NewPost</a></li>
-							<li><a href="~/logout/" title="@Miniblog.Core.Properties.Resources.SignOutAsAdministrator">@Miniblog.Core.Properties.Resources.SignOut</a></li>
+						<li><a asp-controller="Blog" asp-action="Edit" asp-route-id="">@Miniblog.Core.Properties.Resources.NewPost</a></li>
+						<li><a href="~/logout/" title="@Miniblog.Core.Properties.Resources.SignOutAsAdministrator">@Miniblog.Core.Properties.Resources.SignOut</a></li>
 						}
 						else
 						{
-							<li><a href="~/login/?returnUrl=@path" rel="nofollow" title="@Miniblog.Core.Properties.Resources.SignInAsAdministrator">@Miniblog.Core.Properties.Resources.SignIn</a></li>
+						<li><a href="~/login/?returnUrl=@path" rel="nofollow" title="@Miniblog.Core.Properties.Resources.SignInAsAdministrator">@Miniblog.Core.Properties.Resources.SignIn</a></li>
 						}
 					}
 				</ul>

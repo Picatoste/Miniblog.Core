@@ -40,7 +40,7 @@
                 <li> Publicado en </li>
                 @foreach (string cat in Model.Categories)
                 {
-                    <li class="w3-tag w3-round w3-green w3-medium" style="transform:rotate(-3deg)" itemprop="articleSection"><a asp-controller="Blog" asp-action="Category" asp-route-category="@cat.ToLowerInvariant()" asp-route-page="">@cat</a></li>
+                    <li class="w3-tag w3-round w3-black w3-small" itemprop="articleSection"><a asp-controller="Blog" asp-action="Category" asp-route-category="@cat.ToLowerInvariant()" asp-route-page="">@cat</a></li>
                 }
             </ul>
             <text>y tiene</text>
